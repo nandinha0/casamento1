@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ananda & Pedro 💍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bege: #f5f1eb;
+  --dourado: #c6a77d;
+  --texto: #5a4a42;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bege);
+  color: var(--texto);
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  width: 100%;
+  background: rgba(245,241,235,0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px;
+  z-index: 1000;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--texto);
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background: var(--dourado);
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* HEADER */
+header {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+header img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+}
+
+/* SECTIONS */
+section {
+  padding: 120px 20px;
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255,255,255,0.4);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+
+/* LIVRO */
+.livro {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.pagina {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
+}
+
+.pagina.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pagina:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.pagina img {
+  width: 180px;
+  height: 180px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.pagina p {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.8;
+}
+
+.destaque {
+  color: var(--dourado);
+  font-weight: 600;
+}
+
+/* GALERIA */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.galeria img {
+  width: 100%;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.galeria img:hover {
+  transform: scale(1.05);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* RESPONSIVO */
+@media (max-width:600px){
+  .pagina {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  #btnMusica {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(198,167,125,0.9);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#btnMusica:hover {
+  transform: scale(1.1);
+}
+
+}
+</style>
+</head>
+
+<body>
+
+    <audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+
+<button id="btnMusica" onclick="toggleMusica()">💛</button>
+
+<nav>
+  <a href="#home">Início</a>
+  <a href="#historia">História</a>
+  <a href="#galeria">Fotos</a>
+  <a href="#casamento">Casamento</a>
+  <a href="#presentes">Presentes</a>
+  <a href="#rsvp">Confirmar</a>
+</nav>
+
+<header id="home">
+  <img src="principal.jpeg">
+  <div>
+    <h1>Ananda & Pedro</h1>
+    <p>12 de Dezembro de 2026</p>
+    <div id="contador"></div>
+  </div>
+</header>
+
+<section id="historia">
+  <h2>Nossa História 💖</h2>
+
+  <div class="livro">
+
+    <div class="pagina">
+      <img src="foto1.jpg">
+      <p>
+        Tudo começou de um jeito inesperado, mas <span class="destaque">completamente preparado por Deus</span>.<br><br>
+        Em um acampadentro na igreja, nossos caminhos se cruzaram.<br><br>
+        Entre risadas e muito ping-pong, algo especial começou ali…
+      </p>
+    </div>
+
+    <div class="pagina">
+      <img src="foto2.jpg">
+      <p>
+        Depois daquele dia, <span class="destaque">nunca mais paramos de conversar</span>.<br><br>
+        O que era simples se tornou constante… diário… especial.
+      </p>
+    </div>
+
+    <div class="pagina">
+      <img src="foto3.jpg">
+      <p>
+        Com apenas 4 meses, veio o convite: ser o príncipe dos meus 15 anos.<br><br>
+        E ali, na valsa… <span class="destaque">nossos corações começaram a dançar juntos</span>.
+      </p>
+    </div>
+
+    <div class="pagina">
+      <img src="foto4.jpg">
+      <p>
+        Em 9 de março de 2023, começamos a namorar.<br><br>
+        O amor cresceu, amadureceu e se fortaleceu a cada dia.
+      </p>
+    </div>
+
+    <div class="pagina">
+      <img src="foto5.jpg">
+      <p>
+        No dia 7 de fevereiro de 2026… o pedido de noivado.<br><br>
+        <span class="destaque">A confirmação de tudo que Deus já vinha escrevendo.</span>
+      </p>
+    </div>
+
+    <div class="pagina">
+      <img src="foto6.jpg">
+      <p>
+        Hoje seguimos com fé.<br><br>
+        “<span class="destaque">Todas as coisas cooperam para o bem daqueles que o amam</span>.”<br><br>
+        E estamos prontos para o nosso capítulo mais lindo 💍
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section id="galeria">
+  <h2>Nossos Momentos 📸</h2>
+  <div class="galeria">
+    <img src="foto1.jpg" onclick="abrirImagem(this.src)">
+    <img src="foto2.jpg" onclick="abrirImagem(this.src)">
+    <img src="foto3.jpg" onclick="abrirImagem(this.src)">
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="fecharImagem()">
+  <img id="imgGrande">
+</div>
+
+<section id="casamento">
+  <h2>O Casamento 🌿</h2>
+  <p>12/12/2026 - 16h</p>
+</section>
+
+<section id="presentes">
+  <h2>Presentes 🎁</h2>
+  <p>PIX: seuemail@pix.com</p>
+</section>
+
+<section id="rsvp">
+  <h2>Confirme sua presença 💌</h2>
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSfJVBCNIZLekr4Aeg2OwV2HSrBLx6TfThHR-ol74ceaZMT3Lw/viewform?embedded=true"
+    width="100%" 
+    height="600">
+  </iframe>
+</section>
+
+<script>
+/* CONTADOR */
+const data = new Date("2026-12-12 16:00:00");
+setInterval(() => {
+  const diff = data - new Date();
+  const dias = Math.floor(diff / (1000*60*60*24));
+  document.getElementById("contador").innerText =
+    dias + " dias para o nosso grande dia ✨";
+}, 1000);
+
+/* SCROLL */
+const sections = document.querySelectorAll("section, .pagina");
+
+window.addEventListener("scroll", () => {
+  sections.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add("show");
+    }
+  });
+});
+
+/* GALERIA */
+function abrirImagem(src) {
+  document.getElementById("lightbox").style.display = "flex";
+  document.getElementById("imgGrande").src = src;
+}
+
+function fecharImagem() {
+  document.getElementById("lightbox").style.display = "none";
+}
+
+const musica = document.getElementById("musica");
+let tocando = false;
+
+function toggleMusica() {
+  if (!tocando) {
+    musica.play();
+    tocando = true;
+  } else {
+    musica.pause();
+    tocando = false;
+  }
+}
+
+musica.volume = 0.3;
+</script>
+
+</body>
+</html>
